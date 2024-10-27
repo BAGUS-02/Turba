@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:image" content="https://github.com/MerpatiQuu/Home/blob/main/bagus-removebg-preview.png?raw=true" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>BAGUS 02</title>
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #ffffff; /* Light blue background for the whole page */
+}
+.header-image {
+  max-width: 100%; /* Ensures the image doesn't exceed its container */
+  height: auto; /* Maintains aspect ratio */
+  display: block; /* Centers the image */
+  margin: 0 auto; /* Centering */
+}
+
+form {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ff0000;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(254, 0, 0, 0.1);
+  background-color: #378cfb; /* Light blue for the form */
+}
+
+label {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center icons vertically */
+  margin-top: 10px;
+  color: #ffffff; /* Darker text color for better contrast */
+  font-weight: bold;
+}
+
+label i {
+  margin-right: 10px; /* Space between icon and text */
+  color: #ffffff; /* Color for icons */
+  font-size: 18px; /* Size of the icons */
+}
+
+input,
+select,
+button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 4px; /* Rounded corners for inputs */
+  border: 1px solid #ccc; /* Border for inputs */
+}
+
+button {
+  background-color: #ffffff; /* Green */
+  color: #111112;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #00fbfb;
+}
+
+
+#rt {
+  width: 50%; /* Adjust this value as needed */
+  max-width: 100px; /* Maximum width for the input */
+}
+#ktp {
+  width: 45%; /* Adjust this value as needed */
+  max-width: 100px; /* Maximum width for the input */
+}
+#summaryDisplay {
+  background-color: #e3f2fd; /* Light blue background */
+  border: 1px solid #90caf9; /* Light border */
+  border-radius: 8px;
+  padding: 1px;
+  margin-bottom: 2px; /* Space between summary and data display */
+  margin-top: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.summary-card p {
+  margin: 3px 0; /* Consistent spacing for paragraphs */
+  font-size: 16px; /* Font size for summary text */
+}
+#dataDisplay {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px; /* Space between cards */
+  margin-top: 5px; /* Space between form and display */
+}
+
+.data-card {
+  border: 1px solid #0077ff;
+  border-radius: 9px;
+  padding: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: calc(33% - 20px); /* Responsive card width */
+  background-color: transparent; /* Ensure the background is transparent */
+}
+
+.data-card:hover {
+  transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+/* Header and KTP image styles */
+.data-header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1px;
+}
+
+.data-header h4,
+.data-header p {
+  margin: 0; /* Remove margin from header and paragraph */
+  font-size: x-small;
+}
+
+.ktp-image {
+  max-width: 100%;
+  max-height: 100px; /* Fixed height for KTP image */
+  border-radius: 4px; /* Rounded corners for image */
+  background: none; /* Ensure no background is applied to the image */
+  display: block; /* Ensure the image behaves as a block element */
+  margin: 0 auto; /* Center the image if necessary */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .data-card {
+    width: calc(50% - 20px); /* Two cards per row on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .data-card {
+    width: 100%; /* One card per row on mobile */
+  }
+  
+  form {
+    padding: 15px; /* Reduce padding in form for smaller screens */
+  }
+
+  label, input, select, button {
+    font-size: 14px; /* Smaller font size for better readability */
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<div id="header">
+    <img src="https://github.com/MerpatiQuu/Home/blob/main/bagus-removebg-preview.png?raw=true" alt="Data Turba" style="max-width: 100%; height: auto;">
+  </div>  
+
+<form id="pendudukForm">
+    <label for="kecamatan">
+      <i class="fas fa-map-marker-alt"></i> Kecamatan
+    </label>
+    <select id="kecamatan" name="kecamatan" required>
+      <option value="">Pilih Kecamatan</option>
+    </select>
+  
+    <label for="desa">
+      <i class="fas fa-home"></i> Desa
+    </label>
+    <select id="desa" name="desa" required>
+      <option value="">Pilih Desa</option>
+    </select>
+  
+    <label for="rt">
+      <i class="fas fa-hashtag"></i> RT
+    </label>
+    <input type="number" id="rt" name="rt" min="1" required>
+  
+    <label for="ktp">
+      <i class="fas fa-id-card"></i> Unggah KTP
+    </label>
+    <input type="file" id="ktp" name="ktp" accept="image/*" required>
+  
+    <button type="submit">Submit</button>
+  </form>
+  <!-- Summary section -->
+<div id="summaryDisplay" class="summary-card">
+    <p>Jumlah Data: <span id="totalEntries">0</span></p>
+  </div>
+  
+<!-- Display data -->
+<div id="dataDisplay"></div>
+
+<!-- Firebase App and Realtime Database SDKs -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+    import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+  
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCMukOf9cpNOmqiZQjyl8MuO_z4oIh5qiw",
+      authDomain: "taufiq-a086e.firebaseapp.com",
+      databaseURL: "https://taufiq-a086e-default-rtdb.firebaseio.com",
+      projectId: "taufiq-a086e",
+      storageBucket: "taufiq-a086e.appspot.com",
+      messagingSenderId: "346081504708",
+      appId: "1:346081504708:web:e519c9704fcf3408308891",
+      measurementId: "G-QJD763CB1C"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+  
+      // Data kecamatan dan desa di Kabupaten Bondowoso
+  const kecamatanDesa = {
+    "Binakal": ["Baratan", "Bendelan", "Binakal", "Gadingsari", "Jeruk Soksok", "Kembangan", "Sumber Tengah", "Sumberwaru"],
+    "Bondowoso": ["Kembang", "Pancoran", "Pejaten", "Sukowiryo", "Badean", "Blindungan", "Dabasah", "Kademangan", "Kota Kulon", "Nangkaan", "Tamansari"],
+    "Botolinggo": ["Botolinggo", "Gayam", "Gayam Lor", "Lanas", "Lumutan", "Klekehan", "Penang", "Sumber Canting"],
+    "Cermee": ["Bajuran", "Batuampar", "Batusalang", "Bercak", "Bercak Asri", "Cermee", "Grujugan", "Jirek Mas", "Kladi", "Pelalangan", "Ramban Barat", "Ramban Timur", "Solor", "Suling Barat", "Suling Timur"],
+    "Curahdami": ["Curahpoh", "Jetis", "Kupang", "Locare", "Pakuwesi", "Penambangan", "Petung", "Poncogati", "Selolembu", "Sumbersalak", "Sumbersuko", "Curahdami"],
+    "Grujugan": ["Dadapan", "Dawuhan", "Grujugan Kidul", "Kabuaran", "Kejawan", "Pekauman", "Sumber Pandan", "Taman", "Tegal Mijin", "Wanisodo", "Wonosari"],
+    "Jambesari Darus Sholah": ["Grujugan Lor", "Jambeanom", "Jambesari", "Pejagan", "Pengarang", "Pucanganom", "Sumber Anyar", "Sumberjeruk", "Tegalpasir"],
+    "Klabang": ["Besuk", "Blimbing", "Karanganyar", "Karangsengon", "Klabang", "Klampokan", "Leprak", "Pandak", "Sumbersuko", "Wonoboyo", "Wonokerto"],
+    "Maesan": ["Gambangan", "Gunungsari", "Maesan", "Pakuniran", "Penanggungan", "Pujerbaru", "Sucolor", "Suger Lor", "Sumberanyar", "Sumberpakem", "Sumbersari", "Tanahwulan"],
+    "Pakem": ["Andungsari", "Ardisaeng", "Gadingsari", "Kupang", "Pakem", "Patemon", "Petung", "Sumberdumpyong"],
+    "Prajekan": ["Bandilan", "Cangkring", "Prajekan Kidul", "Prajekan Lor", "Sempol", "Tarum", "Walidono"],
+    "Pujer": ["Alassumur", "Kejayan", "Mangli", "Maskuning Barat", "Maskuning Timur", "Mengok", "Padasan", "Randucangkring", "Sukodono", "Sukokerto", "Sukowono"],
+    "Sempol": ["Jampit", "Kali Gedang", "Kalianyar", "Kalisat", "Sempol", "Sumber Rejo"],
+    "Sukosari": ["Kerang", "Nogosari", "Pecalongan", "Sukosari Lor"],
+    "Sumberwringin": ["Rejo Agung", "Sukorejo", "Sukosari Kidul", "Sumber Gading", "Sumberwringin", "Tegaljati"],
+    "Taman Krocok": ["Gentong", "Kemuningan", "Kretek", "Paguan", "Sumberkokap", "Taman", "Trebungan"],
+    "Tamanan": ["Kalianyar", "Karang Melok", "Kemirian", "Mengen", "Sukosari", "Sumber Anom", "Sumber Kemuning", "Tamanan", "Wonosuko"],
+    "Tapen": ["Cindogo", "Gunung Anyar", "Jurang Sapi", "Kalitapen", "Mangli Wetan", "Mrawan", "Taal", "Tapen", "Wonokusumo"],
+    "Tegalampel": ["Karanganyar", "Klabang", "Klabang Agung", "Mandiro", "Purnama", "Tanggulangin", "Tegalampel", "Sekarputih"],
+    "Tenggarang": ["Bataan", "Dawuhan", "Gebang", "Kajar", "Kesemek", "Koncerdarulaman", "Koncer Selatan", "Lojajar", "Pekalangan", "Sumbersalam", "Tangsil Barat", "Tenggarang"],
+    "Tlogosari": ["Brambangdarussolah", "Gunosari", "Jebung Selatan", "Jebung Utara", "Kembang", "Pakisan", "Patemon", "Sulek", "Tlogosari", "Trotosari"],
+    "Wringin": ["Ambulu", "Ampelan", "Banyuputih", "Banyuwulu", "Bukor", "Glingseran", "Gubrih", "Jambewungu", "Jatisari", "Jatitamban", "Sumbercanting", "Sumbermalang", "Wringin"],
+    "Wonosari": ["Bendoarum", "Jumpong", "Kapuran", "Lombok Barat", "Lombok Timur", "Pasarejo", "Pelalangan", "Sumberkalong", "Tangsil Timur", "Traktakan", "Tumpeng", "Wonosari"]
+  };
+  
+    const kecamatanSelect = document.getElementById("kecamatan");
+    const desaSelect = document.getElementById("desa");
+  
+    // Populate Kecamatan dropdown
+    for (let kecamatan in kecamatanDesa) {
+      const option = document.createElement("option");
+      option.value = kecamatan;
+      option.textContent = kecamatan;
+      kecamatanSelect.appendChild(option);
+    }
+  
+    // Populate Desa dropdown based on selected Kecamatan
+    kecamatanSelect.addEventListener("change", function() {
+  const selectedKecamatan = this.value;
+  desaSelect.innerHTML = "<option value=''>Pilih Desa</option>";
+  if (selectedKecamatan && kecamatanDesa[selectedKecamatan]) {
+    kecamatanDesa[selectedKecamatan].forEach(desa => {
+      const option = document.createElement("option");
+      option.value = desa;
+      option.textContent = desa;
+      desaSelect.appendChild(option);
+    });
+  }
+  displayData(); // Refresh data display whenever Kecamatan changes
+});
+
+desaSelect.addEventListener("change", displayData); // Refresh data display when Desa changes
+
+    // Handle form submission
+    document.getElementById("pendudukForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      const kecamatan = document.getElementById("kecamatan").value;
+      const desa = document.getElementById("desa").value;
+      const rt = document.getElementById("rt").value;
+      const ktp = document.getElementById("ktp").files[0];
+  
+      if (!kecamatan || !desa || !rt || !ktp) {
+        alert("Mohon lengkapi semua field!");
+        return;
+      }
+  
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const ktpData = event.target.result;
+        
+        const data = {
+          kecamatan,
+          desa,
+          rt,
+          ktp: ktpData 
+        };
+  
+        // Use `push` to create a new unique entry
+        const newRef = ref(database, 'penduduk');
+        push(newRef, data)
+          .then(() => {
+            alert("Data berhasil disubmit!");
+            document.getElementById("pendudukForm").reset();
+            displayData(); // Refresh data display
+          })
+          .catch(error => {
+            console.error("Error submitting data:", error);
+            alert("Gagal mengirim data.");
+          });
+      };
+      reader.readAsDataURL(ktp);
+    });
+  
+    function displayData() {
+  const dataDisplay = document.getElementById("dataDisplay");
+  const totalEntriesElement = document.getElementById("totalEntries");
+  dataDisplay.innerHTML = ""; // Clear previous data
+
+  const dataRef = ref(database, 'penduduk');
+  onValue(dataRef, (snapshot) => {
+    const data = snapshot.val();
+    const selectedKecamatan = kecamatanSelect.value;
+    const selectedDesa = desaSelect.value;
+
+    let displayedEntriesCount = 0; // Variable to count displayed entries
+
+    // Debugging: Log selected values
+    console.log("Selected Kecamatan:", selectedKecamatan);
+    console.log("Selected Desa:", selectedDesa);
+
+    if (data) {
+      for (let id in data) {
+        const entry = data[id];
+
+        // Check if the entry matches the selected Kecamatan and Desa
+        const isKecamatanMatch = selectedKecamatan === "" || entry.kecamatan === selectedKecamatan;
+        const isDesaMatch = selectedDesa === "" || entry.desa === selectedDesa;
+
+        // Show entry if both Kecamatan and Desa match
+        if (isKecamatanMatch && isDesaMatch) {
+          displayedEntriesCount++; // Increment the count of displayed entries
+
+          const div = document.createElement("div");
+          div.className = "data-card";
+          
+          // Populate data card with entry details
+          div.innerHTML = `
+            <div class="data-header">
+              <p>RT: ${entry.rt}</p>
+            </div>
+            <img src="${entry.ktp}" alt="KTP" class="ktp-image">
+          `;
+          dataDisplay.appendChild(div);
+        }
+      }
+      totalEntriesElement.textContent = displayedEntriesCount; // Update total entries count
+    } else {
+      totalEntriesElement.textContent = "0"; // Reset to zero if no data
+    }
+  });
+}
+
+// Initialize data display on page load
+document.addEventListener("DOMContentLoaded", displayData);
+
+  </script>
+
+</body>
+</html>
